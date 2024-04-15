@@ -1,0 +1,85 @@
+output_dir: benchmark_results
+save_conf_name: config.yaml
+
+model:
+  path: models/
+  weights: sd_mask_rcnn_my_model_20240331-205409.h5
+  settings:
+    image_shape: [512, 512]
+    image_channel_count: 3
+    mean_pixel: [128, 128, 128]
+    backbone: resnet35
+    post_nms_rois_inference: 2000
+    rpn_nms_threshold: 1.0
+    detection_nms_threshold: 0.35
+    image_meta_size: 14
+    #max_gt_instances: 20
+    gpu_count: 1
+    images_per_gpu: 5
+    learning_rate: 0.01
+    steps_per_epoch: 1000
+    validation_steps: 50
+    fpn_classif_fc_layers_size: 1024
+    top_down_pyramid_size: 256
+    num_classes: 2
+    use_mini_mask: False
+    mini_mask_shape: [56,56]
+    rpn_anchor_scales: [32, 64, 128, 256, 512]
+    rpn_anchor_ratios: [0.5, 1, 2]
+    rpn_anchor_stride: 1
+    rpn_train_anchors_per_image: 256
+    pre_nms_limit: 6000
+    post_nms_rois_training: 2000
+    image_resize_mode: "square"
+    image_min_dim: 800
+    image_max_dim: 1024
+    image_min_scale: 0
+    #mean_pixel : [123.7,116.8,103.9]
+    train_rois_per_image: 200
+    roi_positive_ratio: 0.33
+    pool_size: 7
+    mask_pool_size: 14
+    mask_shape: [28,28]
+    max_gt_instances: 100
+    rpn_bbox_std_dev: [0.1,0.1,0.2,0.2]
+    bbox_std_dev: [0.1,0.1,0.2,0.2]
+    detection_max_instances: 100
+    detection_min_confidence: 0.7
+    learing_rate: 0.001
+    learning_momentum: 0.9
+    weight_decay: 0.0001
+    loss_weights: {"rpn_class_loss": 1.,"rpn_bbox_loss": 1.,"mrcnn_class_loss": 1.,"mrcnn_bbox_loss": 1.,"mrcnn_mask_loss": 1.}
+    use_rpn_rois: True
+    train_bn: False
+    gradient_clip_norm: 5.0
+    backbone_strides: [4,8,16,32,64]
+    batch_size: 1
+
+dataset:
+  #path: dataset/wisdom/wisdom/wisdom-real/high-res/
+  path: C:/Users/comyn/OneDrive/Documents/Fontys/VinciTech/dataset
+  images: depth_im
+  masks: segmap
+  indices: test.npy
+
+mask:                                                                                                                                                              
+  remove_bin_pixels: 0 #1              # Set to True if we want to discard predictions based on if they have bin pixels
+  bin_masks: segmasks_filled        # Directory containing bin masks                                                                                                                                                                                                                         
+  overlap_thresh: 0.5               # Overlap threshold
+
+# Visualization settings
+vis:
+  # Prediction vis settings
+  predictions: 1
+  show_bbox_pred: 0
+  show_scores_pred: 0
+  show_class_pred: 0
+
+  # GT vis settings
+  ground_truth: 1
+  show_bbox_gt: 0
+  show_scores_gt: 0
+  show_class_gt: 0
+
+  # Additional vis settings
+  s_bench: 0

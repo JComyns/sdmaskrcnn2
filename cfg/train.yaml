@@ -1,0 +1,67 @@
+model:
+  path: models/
+  weights: new #C:/Users/comyn/OneDrive/Documents/GitHub/sd-maskrcnn/models/sd_mask_rcnn_my_model_20240331-205409.h5     # new, last, coco, imagenet or custom path
+  epochs: 20       # number of epochs to train for
+  settings:
+    name: my_model
+    image_shape: [512,512]
+    image_channel_count: 3
+    mean_pixel: [128, 128, 128]
+    backbone: resnet35
+    #max_gt_instances: 20
+    gpu_count: 1
+    images_per_gpu: 5
+    learning_rate: 0.01
+    steps_per_epoch: 1000
+    validation_steps: 50
+    fpn_classif_fc_layers_size: 1024
+    top_down_pyramid_size: 256
+    num_classes: 2
+    use_mini_mask: False
+    mini_mask_shape: [56,56]
+    rpn_anchor_scales: [32, 64, 128, 256, 512]
+    rpn_anchor_ratios: [0.5, 1, 2]
+    rpn_anchor_stride: 1
+    rpn_nms_threshold: 0.7
+    rpn_train_anchors_per_image: 256
+    pre_nms_limit: 6000
+    post_nms_rois_training: 2000
+    post_nms_rois_inference: 1000
+    image_resize_mode: "square"
+    image_min_dim: 800
+    image_max_dim: 1024
+    image_min_scale: 0
+    #mean_pixel : [123.7,116.8,103.9]
+    train_rois_per_image: 200
+    roi_positive_ratio: 0.33
+    pool_size: 7
+    mask_pool_size: 14
+    mask_shape: [28,28]
+    max_gt_instances: 100
+    rpn_bbox_std_dev: [0.1,0.1,0.2,0.2]
+    bbox_std_dev: [0.1,0.1,0.2,0.2]
+    detection_max_instances: 100
+    detection_min_confidence: 0.7
+    detection_nms_threshold: 0.3
+    learing_rate: 0.001
+    learning_momentum: 0.9
+    weight_decay: 0.0001
+    loss_weights: {"rpn_class_loss": 1.,"rpn_bbox_loss": 1.,"mrcnn_class_loss": 1.,"mrcnn_bbox_loss": 1.,"mrcnn_mask_loss": 1.}
+    use_rpn_rois: True
+    train_bn: False
+    gradient_clip_norm: 5.0
+    image_meta_size: 14
+    backbone_strides: [4,8,16,32,64]
+    batch_size: 5
+
+dataset:
+  path: dataset/
+  train_indices: train.npy
+  val_indices: test.npy
+  images: depth_ims
+  masks: modal_segmasks
+
+# name of the config file to save (within the dataset folder)
+# note that this will be overwritten between multiple runs so
+# you should name this uniquely for each run.
+save_conf_name: config_1e-2_e20_res35.yaml
