@@ -1,9 +1,6 @@
 import os
 import time
 
-#import sys
-#sys.path.append('c:\\Users\\comyn\\OneDrive\\Documents\\GitHub\\sd-maskrcnn')
-
 import numpy as np
 import skimage
 from mrcnn import model as modellib
@@ -12,7 +9,6 @@ from tqdm import tqdm
 
 from . import utils
 from .config import MaskConfig
-
 
 
 class SDMaskRCNNModel(object):
@@ -263,7 +259,7 @@ class SDMaskRCNNModel(object):
         return pred_dir, pred_info_dir, resized_segmask_dir
 
     def train(self, train_dataset, val_dataset):
-        print("_________________________________________________________________________________________________________")
+
         if self.mode != "training":
             raise ValueError("Can only call train in training mode!")
 

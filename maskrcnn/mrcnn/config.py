@@ -210,8 +210,6 @@ class Config(object):
     # Gradient norm clipping
     GRADIENT_CLIP_NORM = 5.0
 
-    
-
     def __init__(self):
         """Set values of computed attributes."""
         # Effective batch size
@@ -227,7 +225,7 @@ class Config(object):
 
         # Image meta data length
         # See compose_image_meta() for details
-        self.IMAGE_META_SIZE = 1 + 3 + 3 + 4 + 1 + self.NUM_CLASSES
+        self.IMAGE_META_SIZE = [1 + 3 + 3 + 4 + 1 + self.NUM_CLASSES]
 
     def display(self):
         """Display Configuration values."""

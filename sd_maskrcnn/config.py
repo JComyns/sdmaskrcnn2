@@ -22,13 +22,10 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 Author: Mike Danielczuk
 """
 
-import sys
-sys.path.insert(0, 'c:\\Users\\comyn\\OneDrive\\Documents\\GitHub\\sd-maskrcnn\\maskrcnn\\mrcnn')
+from mrcnn.config import Config
 
-#from config import Config
-import numpy as np
 
-class MaskConfig():
+class MaskConfig(Config):
     """Configuration for training SD Mask RCNN.
     Derives from the base Config class and overrides values specific
     to SD Mask RCNN.
@@ -40,7 +37,6 @@ class MaskConfig():
     NUM_CLASSES = 1 + 1  # background + object
     USE_MINI_MASK = False
 
-
     # Use smaller anchors because our image and objects are small
     # RPN_ANCHOR_SCALES = (8, 16, 32, 64, 128)  # anchor side in pixels
 
@@ -48,5 +44,4 @@ class MaskConfig():
         # Overriding things here.
         for x in config:
             setattr(self, x.upper(), config[x])
-        #super().__init__()
-        
+        super(MaskConfig, self).__init__()
